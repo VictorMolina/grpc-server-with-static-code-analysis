@@ -1,0 +1,15 @@
+cpd {
+    language = 'java'
+    toolVersion = '6.12.0'
+    minimumTokenCount = 100 // approximately 5-10 lines
+}
+
+cpdCheck {
+    reports {
+        text.enabled = false
+        xml.enabled = true
+    }
+    ignoreAnnotations = true
+    source = sourceSets.main.allJava
+}
+

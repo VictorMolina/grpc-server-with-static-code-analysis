@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.9'
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'java'
+    id 'application'
+    id 'com.google.protobuf' version '0.8.9'
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'checkstyle'
+    id 'pmd'
+    id 'de.aaschmid.cpd' version '2.0'
+    id 'findbugs'
+    id 'jacoco'
+}
+
+apply from: 'gradle/grpc/grpc.gradle'
+apply from: 'gradle/static-code-analysis/staticCodeAnalysis.gradle'
+
+group 'com.victorm.backend'
+version '1.0-SNAPSHOT'
+
+mainClassName = 'com.victorm.backend.GameServer'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.9'
+    implementation 'com.github.kstyrc:embedded-redis:0.6'
+    implementation 'redis.clients:jedis:2.9.3'
+    implementation 'ch.qos.logback:logback-classic'
+    implementation 'io.grpc:grpc-all:1.18.0'
+
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit:4.12'
+}
+
+task jarWithDependencies(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'GameServer',
+                'Implementation-Version': version,
+                'Main-Class': 'com.victorm.backend.GameServer'
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

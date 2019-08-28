@@ -1,0 +1,12 @@
+checkstyle {
+    toolVersion = '8.12'
+    ignoreFailures = false
+    configFile = file("gradle/static-code-analysis/checkstyle/checkstyle.xml")
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.victorm.backend.grpc;
+
+import "model/profile.proto";
+
+message Persist {
+    message Request {
+        Profile profile = 1;
+    }
+    message Response {
+    }
+}
+
+message Get {
+    message Request {
+        string uuid = 1;
+    }
+    message Response {
+        Profile profile = 1;
+    }
+}
+
+message Remove {
+    message Request {
+        string uuid = 1;
+    }
+    message Response {
+    }
+}
+
+service ProfileService {
+    rpc persist(Persist.Request) returns (Persist.Response);
+    rpc get(Get.Request) returns (Get.Response);
+    rpc remove(Remove.Request) returns (Remove.Response);
+}

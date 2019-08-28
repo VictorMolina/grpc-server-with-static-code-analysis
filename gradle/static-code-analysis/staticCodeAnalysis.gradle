@@ -1,0 +1,5 @@
+apply from: "gradle/static-code-analysis/checkstyle/staticCodeAnalysis-checkstyle.gradle"
+apply from: "gradle/static-code-analysis/pmd/staticCodeAnalysis-pmd.gradle"
+apply from: "gradle/static-code-analysis/cpd/staticCodeAnalysis-cpd.gradle"
+apply from: "gradle/static-code-analysis/findbugs/staticCodeAnalysis-findbugs.gradle"
+apply from: "gradle/static-code-analysis/jacoco/staticCodeAnalysis-jacoco.gradle"

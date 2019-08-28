@@ -1,0 +1,8 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.victorm.backend.grpc;
+
+message Profile {
+    string uuid = 1;
+    string name = 2;
+}

@@ -1,0 +1,19 @@
+spring:
+  profiles: local
+environment:
+  redis:
+    embedded: true
+    port: 6376
+  grpcServer:
+    gameId: CATS
+    port: 6666
+---
+spring:
+  profiles: prod
+environment:
+  redis:
+    host: localhost
+    port: 6377
+  grpcServer:
+    gameId: CATS
+    port: 6667
